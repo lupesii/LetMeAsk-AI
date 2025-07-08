@@ -1,20 +1,23 @@
-import { fastify } from "fastify";
+import { fastifyCors } from '@fastify/cors'
+import { fastify } from 'fastify'
 import {
   serializerCompiler,
   validatorCompiler,
   type ZodTypeProvider, //Como isso é um tipo, é necessário colocar type
-} from "fastify-type-provider-zod";
-import { fastifyCors } from "@fastify/cors";
+} from 'fastify-type-provider-zod'
+import { env } from './env.ts'
 
-const app = fastify().withTypeProvider<ZodTypeProvider>(); //Extende o fastify para utilizar como provedor de tipos o zod
+const app = fastify().withTypeProvider<ZodTypeProvider>() //Extende o fastify para utilizar como provedor de tipos o zod
 
 app.register(fastifyCors, {
-  origin: "http://localhost:3000",
-});
+  origin: 'http://localhost:3000',
+})
 
-app.setSerializerCompiler(serializerCompiler);
-app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler)
+app.setValidatorCompiler(validatorCompiler)
 
-app.listen({ port: 3000 }).then(() => {
-  console.log("HTTP server online!!");
-});
+app.get('/health', () => {
+  return 'OK'
+})
+
+app.listen({ port: env.PORT })
