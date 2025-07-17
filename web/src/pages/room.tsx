@@ -1,5 +1,5 @@
 import { QuestionForm } from '@/components/question-form'
-import { QuestionItem } from '@/components/question-item'
+import { QuestionList } from '@/components/question-list'
 import { Button } from '@/components/ui/button'
 import type { RoomParams } from '@/http/types/room-params'
 import { ArrowLeft, Radio } from 'lucide-react'
@@ -43,23 +43,7 @@ export function Room() {
           <QuestionForm roomId={params.roomId} />
         </div>
 
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-2xl text-foreground">
-              Perguntas e Respostas
-            </h2>
-          </div>
-
-          <div>
-            <QuestionItem
-              question={{
-                id: '1',
-                question: 'Pergunta 1',
-                createAt: new Date().toISOString(),
-              }}
-            />
-          </div>
-        </div>
+        <QuestionList roomId={params.roomId} />
       </section>
     </main>
   )

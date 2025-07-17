@@ -18,6 +18,7 @@ import {
 } from './ui/form'
 import { Textarea } from './ui/textarea'
 import { Button } from './ui/button'
+import { UseCreateQuestion } from '@/http/use-create-question'
 
 const createQuestionSchema = z.object({
   question: z
@@ -34,6 +35,8 @@ interface QuestionFormProps {
 }
 
 export function QuestionForm({ roomId }: QuestionFormProps) {
+  const { mutateAsync: createQuestion } = UseCreateQuestion(roomId)
+
   const form = useForm<CreateQuestionFormData>({
     resolver: zodResolver(createQuestionSchema),
     defaultValues: {
@@ -41,10 +44,12 @@ export function QuestionForm({ roomId }: QuestionFormProps) {
     },
   })
 
-  function handleCreateQuestion(data: CreateQuestionFormData) {
-    // biome-ignore lint/suspicious/noConsole: dev
-    console.log(data, roomId)
+  async function handleCreateQuestion(data: CreateQuestionFormData) {
+    await createQuestion(data)
+    form.reset()
   }
+
+  const { isSubmitting } = form.formState
 
   return (
     <Card>
@@ -70,6 +75,7 @@ export function QuestionForm({ roomId }: QuestionFormProps) {
                   <FormControl>
                     <Textarea
                       className="min-h-[100px]"
+                      disabled={isSubmitting}
                       placeholder="O que você gostaria de saber?"
                       {...field}
                     />
@@ -79,7 +85,7 @@ export function QuestionForm({ roomId }: QuestionFormProps) {
               )}
             />
 
-            <Button className="w-full" type="submit">
+            <Button className="w-full" disabled={isSubmitting} type="submit">
               Enviar pergunta
             </Button>
           </form>
