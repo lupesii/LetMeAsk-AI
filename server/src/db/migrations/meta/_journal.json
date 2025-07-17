@@ -15,6 +15,34 @@
       "when": 1752183647264,
       "tag": "0001_lonely_doomsday",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752452012862,
+      "tag": "0002_normal_king_cobra",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1752787318376,
+      "tag": "0003_complete_ezekiel_stane",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1752787343331,
+      "tag": "0004_right_vanisher",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1752788997560,
+      "tag": "0005_elite_sugar_man",
+      "breakpoints": true
     }
   ]
 }
